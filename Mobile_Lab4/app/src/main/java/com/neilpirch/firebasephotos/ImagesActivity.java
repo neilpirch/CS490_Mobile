@@ -3,6 +3,7 @@ package com.neilpirch.firebasephotos;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,7 +37,7 @@ public class ImagesActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById((R.id.recycler_view));
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         mProgressCircle = findViewById(R.id.progress_circle);
 
