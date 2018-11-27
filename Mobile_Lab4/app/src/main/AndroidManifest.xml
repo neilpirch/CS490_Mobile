@@ -3,7 +3,10 @@
     package="com.neilpirch.firebasephotos">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -19,10 +22,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDRUH02y-YRHs3qTHvFlKYlF89FYxxDbb8" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,7 +42,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+
         <activity android:name=".ImagesActivity"></activity>
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HelpMeLoginActivity" />
+        <activity
+            android:name=".LocationActivity"
+            android:label="@string/title_activity_location"></activity>
+
     </application>
 
 </manifest>

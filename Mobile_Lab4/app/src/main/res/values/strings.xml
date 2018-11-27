@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Firebase Photos</string>
+    <string name="facebook_application_id" translatable="false">258829854992149</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb258829854992149</string>
+    <string name="title_activity_location">Confirm Location</string>
+
 </resources>
