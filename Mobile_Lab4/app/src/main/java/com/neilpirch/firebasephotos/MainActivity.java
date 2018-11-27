@@ -80,24 +80,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBtnChooseImage = findViewById(R.id.btn_choose_image);
+
         mBtnTakePhoto = findViewById(R.id.btn_take_photo);
         mBtnUpload = findViewById(R.id.btn_upload);
-        mTextViewShowUploads = findViewById(R.id.text_view_show_uploads);
-        mEditTextFileName = findViewById(R.id.edit_text_file_name);
+
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
-        mBtnChooseImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFileChooser();
-
-            }
-        });
 
         mBtnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,13 +107,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mTextViewShowUploads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImagesActivity();
-
-            }
-        });
     }
 
     private void openFileChooser() {
@@ -252,23 +237,13 @@ public class MainActivity extends AppCompatActivity {
                                     //Now play with downloadPhotoUrl
                                     //Store data into Firebase Realtime Database
                                     Toast.makeText(MainActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                            downloadPhotoUrl.toString());
-                                    String uploadId = mDatabaseRef.push().getKey();
                                     Log.d(TAG, "onSuccess: " + downloadPhotoUrl.toString());
-                                    mDatabaseRef.child(uploadId).setValue(upload);
+
+                                    Intent intent = new Intent(MainActivity.this, com.neilpirch.firebasephotos.LocationActivity.class);
+                                    intent.putExtra("filePath", downloadPhotoUrl.toString());
+                                    startActivity(intent);
                                 }
                             });
-
-                            Toast.makeText(MainActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                    fileReference.getDownloadUrl().toString());
-                            //String uploadId = mDatabaseRef.push().getKey();
-                            //mDatabaseRef.child(uploadId).setValue(upload);
-                            Intent intent = new Intent(MainActivity.this, com.neilpirch.firebasephotos.LocationActivity.class);
-                            intent.putExtra("filePath", mImageFileName +".jpg");
-                            startActivity(intent);
-
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

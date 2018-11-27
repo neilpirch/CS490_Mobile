@@ -33,7 +33,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseReference;
     private ValueEventListener mDBListener;
-    private List<Upload> mUploads;
+    private List<Help> mUploads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
                 Log.d(TAG, "onDataChange: data changed");
                 mUploads.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Upload upload = postSnapshot.getValue(Upload.class);
+                    Help upload = postSnapshot.getValue(Help.class);
                     upload.setKey(postSnapshot.getKey());
                     mUploads.add(upload);
                     Log.d(TAG, "onDataChange: " + upload.getImageUrl() + " added to arraylist");
@@ -103,7 +103,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
 
     @Override
     public void onDeleteClick(int position) {
-        Upload selectedItem = mUploads.get(position);
+        Help selectedItem = mUploads.get(position);
         final String selectedKey = selectedItem.getKey();
 
         StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());

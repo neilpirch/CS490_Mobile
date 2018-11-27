@@ -18,10 +18,10 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private Context mContext;
-    private List<Upload> mUploads;
+    private List<Help> mUploads;
     private OnItemClickListener mListener;
 
-    public ImageAdapter(Context context, List<Upload> uploads) {
+    public ImageAdapter(Context context, List<Help> uploads) {
         mContext = context;
         mUploads = uploads;
     }
@@ -34,14 +34,16 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
-        Upload uploadCurrent = mUploads.get(position);
-        holder.textViewName.setText(uploadCurrent.getName());
+        Help uploadCurrent = mUploads.get(position);
+        holder.textViewName.setText(uploadCurrent.getAddress());
         Picasso.with(mContext)
                 .load(uploadCurrent.getImageUrl())
                 .placeholder(R.mipmap.ic_launcher)
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);
+        holder.textViewLat.setText(Double.toString(uploadCurrent.getLat()));
+        holder.textViewLon.setText(Double.toString(uploadCurrent.getLon()));
     }
 
     @Override
@@ -51,13 +53,15 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     public class ImageViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener,View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        public TextView textViewName;
+        public TextView textViewName, textViewLat, textViewLon;
         public ImageView imageView;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
 
             textViewName = itemView.findViewById(R.id.text_view_name);
+            textViewLat = itemView.findViewById(R.id.text_view_lat);
+            textViewLon = itemView.findViewById(R.id.text_view_lon);
             imageView = itemView.findViewById(R.id.image_view_upload);
 
             itemView.setOnClickListener(this);

@@ -27,9 +27,12 @@
             android:value="AIzaSyDRUH02y-YRHs3qTHvFlKYlF89FYxxDbb8" />
 
         <activity android:name=".MainActivity">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
 
         <provider
@@ -42,11 +45,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-
-        <activity android:name=".ImagesActivity"></activity>
+        <activity android:name=".ImagesActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,7 +57,8 @@
         <activity
             android:name=".LocationActivity"
             android:label="@string/title_activity_location" />
-        <activity android:name=".HelpOnWayActivity"></activity>
+        <activity android:name=".HelpOnWayActivity" />
+        <activity android:name=".HelperLoginActivity"></activity>
     </application>
 
 </manifest>

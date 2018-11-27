@@ -39,8 +39,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
         //printKeyHash();
 
-        FirebaseAuth.getInstance().signOut();
-
         helpMeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +55,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 // Create and launch sign-in intent
                 startActivity(
-                        new Intent(WelcomeActivity.this, com.neilpirch.firebasephotos.HelpMeLoginActivity.class));
+                        new Intent(WelcomeActivity.this, com.neilpirch.firebasephotos.HelperLoginActivity.class));
             }
         });
 

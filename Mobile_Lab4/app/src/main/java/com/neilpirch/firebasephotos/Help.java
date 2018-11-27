@@ -7,20 +7,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Help {
-    public String address;
-    public double lat;
-    public double lon;
-    public String image_path;
+    private String address;
+    private double lat;
+    private double lon;
+    private String imageUrl;
+    private String mKey;
 
     public Help(){
 
     }
 
-    public Help(String address, double lat, double lon, String image_path){
+    public Help(String address, double lat, double lon, String imageUrl){
         this.address = address;
         this.lat = lat;
         this.lon = lon;
-        this.image_path = image_path;
+        this.imageUrl = imageUrl;
     }
 
     public String getAddress(){return address;}
@@ -32,8 +33,8 @@ public class Help {
     public double getLon(){return lon;}
     public void setLon(double lon){this.lon=lon;}
 
-    public String getImage_path(){return image_path;}
-    public void setImage_path(String image_path){this.image_path=image_path;}
+    public String getImageUrl(){return imageUrl;}
+    public void setImageUrl(String imageUrl){this.imageUrl=imageUrl;}
 
     @Exclude
     public Map<String, Object> toMap(){
@@ -41,8 +42,18 @@ public class Help {
         result.put("address", address);
         result.put("lat", lat);
         result.put("lon", lon);
-        result.put("image_path", image_path);
+        result.put("imageUrl", imageUrl);
 
         return result;
+    }
+
+    @Exclude
+    public String getKey() {
+        return mKey;
+    }
+
+    @Exclude
+    public void setKey(String key) {
+        mKey = key;
     }
 }
