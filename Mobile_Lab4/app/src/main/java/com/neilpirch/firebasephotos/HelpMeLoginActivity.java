@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -33,6 +36,9 @@ public class HelpMeLoginActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private static final String EMAIL = "email";
     private FirebaseAuth mAuth;
+    private Button emailLoginButton, signUpButton;
+
+    private TextView emailView, passwordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,38 @@ public class HelpMeLoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         mAuth = FirebaseAuth.getInstance();
+
+        emailView = findViewById(R.id.email);
+        passwordView = findViewById(R.id.password);
+
+        emailLoginButton = findViewById(R.id.emailLoginButton);
+        signUpButton = findViewById(R.id.signUpButton);
+
+        emailLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String email = emailView.getText().toString();
+                String password = passwordView.getText().toString();
+
+                if(email != "" && password != ""){
+                    emailLogin(email,password);
+                }
+            }
+        });
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String email = emailView.getText().toString();
+                String password = passwordView.getText().toString();
+
+                if(email != "" && password != ""){
+                    emailSignup(email,password);
+                }
+            }
+        });
 
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
@@ -82,6 +120,52 @@ public class HelpMeLoginActivity extends AppCompatActivity {
         if (currentUser !=null) {
             updateUI(currentUser);
         }
+    }
+
+    private void emailLogin(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            //Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            //Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(HelpMeLoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    private void emailSignup(String email, String password){
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            //Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            //Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(HelpMeLoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     private void handleFacebookAccessToken(AccessToken token) {

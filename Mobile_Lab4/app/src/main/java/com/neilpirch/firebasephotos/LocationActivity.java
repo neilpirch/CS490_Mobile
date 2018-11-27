@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class LocationActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -50,7 +51,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         mFileName = "";
 
         if (extras != null) {
-            mFileName = extras.getString("fileName");
+            mFileName = extras.getString("filePath");
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -65,8 +66,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads/");
-
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
     }
 
 
@@ -161,6 +161,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     private void submitHelpRequest(String filePath){
         Help help = new Help(userAddress.toString(), latitute, longitude, filePath);
 
-        mDatabaseRef.push().setValue(help);
+        mDatabaseRef.child("uploads").push().setValue(help);
+
+        startActivity(new Intent(LocationActivity.this, com.neilpirch.firebasephotos.HelpOnWayActivity.class));
+
     }
 }

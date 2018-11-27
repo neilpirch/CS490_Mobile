@@ -37,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
         helpMeButton = findViewById(R.id.helpMe_button);
         helperButton = findViewById(R.id.helper_button);
 
-        printKeyHash();
+        //printKeyHash();
 
         FirebaseAuth.getInstance().signOut();
 
@@ -80,7 +80,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 // ...
             }
         }
-    }
+    }/*
     private void printKeyHash() {
         // Add code to print out the key hash
         try {
@@ -95,5 +95,5 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             Log.e("KeyHash:", e.toString());
         }
-    }
+    }*/
 }
