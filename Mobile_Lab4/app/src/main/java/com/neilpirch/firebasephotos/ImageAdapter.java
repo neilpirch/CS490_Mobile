@@ -78,10 +78,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.setHeaderTitle("Select Action");
-            MenuItem rename = menu.add(Menu.NONE, 1, 1, "Rename");
-            MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
+            MenuItem delete = menu.add(Menu.NONE, 1, 1, "Delete");
+            //MenuItem rename = menu.add(Menu.NONE, 2, 2, "Rename");
 
-            rename.setOnMenuItemClickListener(this);
+            //rename.setOnMenuItemClickListener(this);
             delete.setOnMenuItemClickListener(this);
         }
 
@@ -92,11 +92,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 if (position != RecyclerView.NO_POSITION) {
                     switch (item.getItemId()) {
                         case 1:
-                            mListener.onRenameClick(position);
-                            return true;
-                        case 2:
                             mListener.onDeleteClick(position);
                             return true;
+                        /*case 2:
+                            mListener.onRenameClick(position);
+                            return true;*/
                     }
 
                 }
@@ -108,7 +108,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void onRenameClick(int position);
+       // void onRenameClick(int position);
 
         void onDeleteClick(int position);
     }

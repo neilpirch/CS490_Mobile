@@ -27,9 +27,9 @@
             android:value="AIzaSyDRUH02y-YRHs3qTHvFlKYlF89FYxxDbb8" />
 
         <activity android:name=".MainActivity">
-            <intent-filter>
+            <!--<intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <provider
@@ -47,6 +47,7 @@
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".HelpMeLoginActivity" />

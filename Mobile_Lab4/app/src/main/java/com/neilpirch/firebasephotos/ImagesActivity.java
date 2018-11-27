@@ -88,7 +88,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+   /* @Override
     public void onRenameClick(int position) {
         Upload selectedItem = mUploads.get(position);
         final String selectedKey = selectedItem.getKey();
@@ -99,7 +99,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         // trigger popup editText in alert dialog?
 
 
-    }
+    }*/
 
     @Override
     public void onDeleteClick(int position) {
