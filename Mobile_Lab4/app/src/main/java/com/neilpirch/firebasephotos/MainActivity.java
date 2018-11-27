@@ -244,10 +244,10 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
                                     fileReference.getDownloadUrl().toString());
-                            String uploadId = mDatabaseRef.push().getKey();
-                            mDatabaseRef.child(uploadId).setValue(upload);
+                            //String uploadId = mDatabaseRef.push().getKey();
+                            //mDatabaseRef.child(uploadId).setValue(upload);
                             Intent intent = new Intent(MainActivity.this, com.neilpirch.firebasephotos.LocationActivity.class);
-                            intent.putExtra("filePath", mImageFileName);
+                            intent.putExtra("filePath", mImageFileName +".jpg");
                             startActivity(intent);
                         }
                     })
