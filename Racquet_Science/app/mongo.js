@@ -5,12 +5,62 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
-var url='mongodb://user1:password1@ds119113.mlab.com:19113/cs490';//1.Modify this url with the credentials of your db name and password.
+var url='mongodb://localhost/tennis_atp';//1.Modify this url with the credentials of your db name and password.
+var dbo = db.db("tennis_atp");
 var ObjectID = require('mongodb').ObjectID;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+MongoClient.connect(url, function(err, db) {
+    if(err)
+    {
+        res.write("Failed, Error while connecting to Database");
+        res.end();
+    }
+    var query = req.query;
+    console.log(query);
+
+    dbo.collection('atp_players').find().toArray(function(err, result){
+        if(err)
+        {
+            res.write("get Failed");
+            res.end();
+        }else
+        {
+            console.log(res);
+            res.send(JSON.stringify(result));
+        }
+        console.log("Got All Documents");
+    });
+});
+app.get('/list', function (req, res) {
+    MongoClient.connect(url, function(err, db) {
+        if(err)
+        {
+            res.write("Failed, Error while connecting to Database");
+            res.end();
+        }
+        var query = req.query;
+        console.log(query);
+
+        db.collection('atp_players').find().toArray(function(err, result){
+            if(err)
+            {
+                res.write("get Failed");
+                res.end();
+            }else
+            {
+                console.log(res);
+                res.send(JSON.stringify(result));
+            }
+            console.log("Got All Documents");
+        });
+    });
+
+});
+
 app.post('/create', function (req, res) {
     MongoClient.connect(url, function(err, db) {
         if(err)
@@ -33,7 +83,7 @@ app.get('/get', function (req, res) {
             res.end();
         }
 
-        db.collection('matches').find().toArray(function(err, result){
+        db.collection('atp_matches').find().toArray(function(err, result){
             if(err)
             {
                 res.write("get Failed");
